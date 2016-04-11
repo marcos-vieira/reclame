@@ -114,8 +114,7 @@ app.get('/load', function(request, response) {
 	  	console.log('Total de registros lidos:'+jsonarray.data.length);
 		  for(var i = 0; i < jsonarray.data.length; i++) {
 	 	   //tweaks to store data in cloudant
-      		jsonarray.data[i]._id  = "r" + jsonarray.data[i].id;		    
-		    //console.log(jsonarray.data[i]._id);
+	 	   jsonarray.data[i]._id  = "r" + jsonarray.data[i].id;
 		  }
 		bulkSave(jsonarray.data, response);
 	});
