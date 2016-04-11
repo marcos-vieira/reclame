@@ -1,0 +1,14 @@
+[estatisticas] (mostra as estatísticas por tipo (últimos 12 meses, 6 meses, último ano, ...)
+https://iosite.reclameaqui.com.br/raichu-io-site-0.0.1-SNAPSHOT/companyindex/company/103
+
+[todas as reclamacoes] 
+https://iosearch.reclameaqui.com.br/raichu-io-site-search-0.0.1-SNAPSHOT/query/companyComplains/[RESULTADOS]/820?company=103
+
+[consulta personalizada]
+https://iosearch.reclameaqui.com.br/raichu-io-site-search-0.0.1-SNAPSHOT/complains?index=0&offset=4&order=created&orderType=desc&fields=id,title,evaluation&company=103&status=ANSWERED&evaluated=bool:true&solved=bool:true&deleted=bool:false
+
+[todas as reclamacoes]
+https://iosearch.reclameaqui.com.br/raichu-io-site-search-0.0.1-SNAPSHOT/query/companyComplains/[RESULTADOS]/2?company=103&evaluated=bool:false
+
+[consulta individual]
+https://iosite.reclameaqui.com.br/raichu-io-site-0.0.1-SNAPSHOT/complain/17971986/public
