@@ -41,7 +41,8 @@ client.methods.getComplaints(args, function (reclamacoes, resposta) {
   console.log(reclamacoes.data.length);
   console.log(reclamacoes.count);
   for(var i = 0; i < reclamacoes.data.length; i++) {
-    reclamacoes.data[i]._id  = reclamacoes.data[i].id;
+    //tweaks to store data in cloudant
+      reclamacoes.data[i]._id  = "r" + reclamacoes.data[i].id;
     //reclamacoes.data[i]._rev  = String(Math.floor(new Date() / 1000));
   }
   console.log(reclamacoes.data);

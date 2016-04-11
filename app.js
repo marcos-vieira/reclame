@@ -1,7 +1,6 @@
 /**
  * Module dependencies.
  */
-
 var express = require('express'), routes = require('./routes'), user = require('./routes/user'), http = require('http'), path = require('path'), fs = require('fs');
 
 var app = express();
@@ -73,11 +72,17 @@ function initDBConnection() {
 		// Variables section for an app in the Bluemix console dashboard).
 		// Alternately you could point to a local database here instead of a 
 		// Bluemix service.
-		//dbCredentials.host = "REPLACE ME";
-		//dbCredentials.port = REPLACE ME;
-		//dbCredentials.user = "REPLACE ME";
-		//dbCredentials.password = "REPLACE ME";
-		//dbCredentials.url = "REPLACE ME";
+		  dbCredentials.host = "cdce4ce9-fcd5-4536-a81d-b27b328de968-bluemix.cloudant.com";
+		  dbCredentials.port = "443";
+		  dbCredentials.user = "cdce4ce9-fcd5-4536-a81d-b27b328de968-bluemix";
+		  dbCredentials.password = "segredo!";
+		  dbCredentials.url = "https://cdce4ce9-fcd5-4536-a81d-b27b328de968-bluemix:8698449df8359993e3efd0d05c2f3eab9b22130dcbd3c488645c9936dcde3caf@cdce4ce9-fcd5-4536-a81d-b27b328de968-bluemix.cloudant.com";
+		  cloudant = require('cloudant')(dbCredentials.url);
+		  // check if DB exists if not create
+		  cloudant.db.create(dbCredentials.dbName, function (err, res) {
+			if (err) { console.log('could not create db ', err); }
+		  });
+		db = cloudant.use(dbCredentials.dbName);
 	}
 }
 
@@ -107,9 +112,9 @@ app.get('/load', function(request, response) {
 	  	console.log('Total de registros da consulta:'+jsonarray.count);
 	  	console.log('Total de registros lidos:'+jsonarray.data.length);
 		  for(var i = 0; i < jsonarray.data.length; i++) {
-		    jsonarray.data[i]._id  = jsonarray.data[i].id;
-		    //jsonarray.data[i]._rev  = "pc" + String(Math.floor(new Date() / 1000));
-
+	 	   //tweaks to store data in cloudant
+      		jsonarray.data[i]._id  = "r" + jsonarray.data[i].id;		    
+		    console.log(jsonarray.data[i]._id);
 		  }
 		bulkSave(jsonarray.data, response);
 	});
