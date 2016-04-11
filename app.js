@@ -98,27 +98,31 @@ app.get('/load', function(request, response) {
 	                        }
 	};
 	client.registerMethod("getComplaints", "https://iosearch.reclameaqui.com.br/raichu-io-site-search-0.0.1-SNAPSHOT/complains?index=${index}&offset=${offset}&order=${order}&orderType=${orderType}&fields=${fields}&company=${company}&deleted=${deleted}", "GET");
-	client.methods.getComplaints(args, function (reclamacoes, resposta) {
-	  	console.log('Total de registros da consulta:'+reclamacoes.count);
-	  	console.log('Total de registros lidos:'+reclamacoes.data.length);
-		  for(var i = 0; i < reclamacoes.data.length; i++) {
-		    reclamacoes.data[i]._id  = reclamacoes.data[i].id;
-		    //reclamacoes.data[i]._rev  = "pc" + String(Math.floor(new Date() / 1000));
+	client.methods.getComplaints(args, function (jsonarray, responsebody) {
+	  	console.log('Total de registros da consulta:'+jsonarray.count);
+	  	console.log('Total de registros lidos:'+jsonarray.data.length);
+		  for(var i = 0; i < jsonarray.data.length; i++) {
+		    jsonarray.data[i]._id  = jsonarray.data[i].id;
+		    //jsonarray.data[i]._rev  = "pc" + String(Math.floor(new Date() / 1000));
 
 		  }
-		bulkSave(reclamacoes.data, response);
+		bulkSave(jsonarray.data, response);
 	});
 });
 
-var bulkSave = function(reclamacoes, response) {	
+var bulkSave = function(jsonarray, response) {	
 	db.bulk({
-		docs : reclamacoes
+		docs : jsonarray
 	}, function(err, doc) {
 				if(err) {
 					console.log('Erro inserindo dados\n'+err);
+					response.sendStatus(500);
+					response.end();
 					return 500;
 				} else {
 					console.log('Dados inseridos com sucesso\n');
+					response.sendStatus(200);
+					response.end();
 					return 200;
 				}
 	});
