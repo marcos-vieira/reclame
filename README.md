@@ -1,4 +1,3 @@
 # Reclame
 
-Script para ler reclamações do reclameaqui.com.br e gravar em um database Cloudant.
-
+Script que consulta reclamações do reclameaqui.com.br e armazena no Cloudant para análise.

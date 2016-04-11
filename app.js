@@ -89,7 +89,7 @@ app.get('/load', function(request, response) {
 	console.log("Load Invoked..");	
 	var client = new Client();
 	var args = { path: { index: "0", 
-	                          offset: "1",
+	                          offset: "2", //INDICAR AQUI QUANTOS REGISTROS VAI LER
 	                          order: "created", 
 	                          orderType: "desc",
 	                          fields: "id,created,status,title,description,evaluation,evaluated,solved,score,hasReply,dealAgain,compliment,userState,userCity",
@@ -110,35 +110,19 @@ app.get('/load', function(request, response) {
 	});
 });
 
-var  saveDoc = function(){
-		db.get(id, { revs_info: true }, function(err, doc) {
-		if (!err) {
-			console.log(doc);
-			doc.name = name;
-			doc.value = value;
-			db.insert(doc, doc.id, function(err, doc) {
-				if(err) {
-					console.log('Error inserting data\n'+err);
-					return 500;
-				}
-				return 200;
-			});
-		}
-	});
-}
-
 var bulkSave = function(reclamacoes, response) {	
 	db.bulk({
 		docs : reclamacoes
 	}, function(err, doc) {
-		if(err) {
-			console.log(err);
-		} else
-			console.log(doc);
+				if(err) {
+					console.log('Erro inserindo dados\n'+err);
+					return 500;
+				} else {
+					console.log('Dados inseridos com sucesso\n');
+					return 200;
+				}
 	});
 }
-
-
 
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
 	console.log('Express server listening on port ' + app.get('port'));

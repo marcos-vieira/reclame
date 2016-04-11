@@ -1,7 +1,6 @@
 #!/usr/bin/node
 
 /*
-Script que consulta reclamações do reclameaqui.com.br e armazena no Cloudant para análise
 
 Informações sobre a consulta
 url: https://iosearch.reclameaqui.com.br/raichu-io-site-search-0.0.1-SNAPSHOT/complains
@@ -28,7 +27,7 @@ var Client = require('node-rest-client').Client;
 var client = new Client();
 
 var args = { path: { index: "0", 
-                          offset: "1",
+                          offset: "1", //INDICAR AQUI QUANTOS REGISTROS VAI LER
                           order: "created", 
                           orderType: "desc",
                           fields: "id,created,status,title,description,evaluation,evaluated,solved,score,hasReply,dealAgain,compliment,userState,userCity",
@@ -43,9 +42,8 @@ client.methods.getComplaints(args, function (reclamacoes, resposta) {
   console.log(reclamacoes.count);
   for(var i = 0; i < reclamacoes.data.length; i++) {
     reclamacoes.data[i]._id  = reclamacoes.data[i].id;
-    reclamacoes.data[i]._rev  = String(Math.floor(new Date() / 1000));
+    //reclamacoes.data[i]._rev  = String(Math.floor(new Date() / 1000));
   }
   console.log(reclamacoes.data);
-
 
 });
