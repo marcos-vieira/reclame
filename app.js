@@ -95,6 +95,7 @@ app.get('/load', function(request, response) {
 	var client = new Client();
 	if (request.query.offset){
 	  offset = request.query.offset;
+	  if (offset > 1000) offset = 1000; //LIMITE PARA PROCESSAMENTO ONLINE
 	}else{
 	  offset = "100"; //INDICAR AQUI QUANTOS REGISTROS VAI LER
 	}	
