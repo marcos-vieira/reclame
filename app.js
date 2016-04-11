@@ -88,8 +88,13 @@ app.get('/', routes.index);
 app.get('/load', function(request, response) {
 	console.log("Load Invoked..");	
 	var client = new Client();
+	if (request.query.offset){
+	  offset = request.query.offset;
+	}else{
+	  offset = "100"; //INDICAR AQUI QUANTOS REGISTROS VAI LER
+	}	
 	var args = { path: { index: "0", 
-	                          offset: "2", //INDICAR AQUI QUANTOS REGISTROS VAI LER
+	                          offset: offset, 
 	                          order: "created", 
 	                          orderType: "desc",
 	                          fields: "id,created,status,title,description,evaluation,evaluated,solved,score,hasReply,dealAgain,compliment,userState,userCity",
@@ -115,13 +120,13 @@ var bulkSave = function(jsonarray, response) {
 		docs : jsonarray
 	}, function(err, doc) {
 				if(err) {
-					console.log('Erro inserindo dados\n'+err);
 					response.sendStatus(500);
+					console.log('Erro inserindo dados\n'+err);
 					response.end();
 					return 500;
 				} else {
-					console.log('Dados inseridos com sucesso\n');
 					response.sendStatus(200);
+					console.log('Dados inseridos com sucesso\n');				
 					response.end();
 					return 200;
 				}
@@ -131,4 +136,3 @@ var bulkSave = function(jsonarray, response) {
 http.createServer(app).listen(app.get('port'), '0.0.0.0', function() {
 	console.log('Express server listening on port ' + app.get('port'));
 });
-

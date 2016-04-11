@@ -25,9 +25,9 @@ retorna um objeto com o atributou count (total de registros) e data (array de ob
 
 var Client = require('node-rest-client').Client;
 var client = new Client();
-
+var offset = "100"; //INDICAR AQUI QUANTOS REGISTROS VAI LER
 var args = { path: { index: "0", 
-                          offset: "1", //INDICAR AQUI QUANTOS REGISTROS VAI LER
+                          offset: offset, 
                           order: "created", 
                           orderType: "desc",
                           fields: "id,created,status,title,description,evaluation,evaluated,solved,score,hasReply,dealAgain,compliment,userState,userCity",
@@ -47,3 +47,10 @@ client.methods.getComplaints(args, function (reclamacoes, resposta) {
   console.log(reclamacoes.data);
 
 });
+
+
+
+
+
+
+ 
