@@ -1,8 +1,0 @@
-//CREDENCIAIS
-
-
-		  dbCredentials.host = "cdce4ce9-fcd5-4536-a81d-b27b328de968-bluemix.cloudant.com";
-		  dbCredentials.port = "443";
-		  dbCredentials.user = "cdce4ce9-fcd5-4536-a81d-b27b328de968-bluemix";
-		  dbCredentials.password = "8698449df8359993e3efd0d05c2f3eab9b22130dcbd3c488645c9936dcde3caf";
-		  dbCredentials.url = "https://cdce4ce9-fcd5-4536-a81d-b27b328de968-bluemix:8698449df8359993e3efd0d05c2f3eab9b22130dcbd3c488645c9936dcde3caf@cdce4ce9-fcd5-4536-a81d-b27b328de968-bluemix.cloudant.com";
