@@ -45,7 +45,7 @@ client.methods.getComplaints(args, function (reclamacoes, resposta) {
       reclamacoes.data[i]._id  = "r" + reclamacoes.data[i].id;
     //reclamacoes.data[i]._rev  = String(Math.floor(new Date() / 1000));
   }
-  console.log(reclamacoes.data);
+  //console.log(reclamacoes.data);
 
 });
 
